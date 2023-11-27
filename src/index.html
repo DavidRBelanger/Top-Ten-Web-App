@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Document</title>
+    <style>
+        /* Add styles for blurred effect */
+        td.blur {
+            filter: blur(5px);
+            color: transparent;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 <body>
     <div id="navbar">
         <h1>Top 10 Game</h1>
     </div>
     <h2>List Title</h2>
-    <table>
+    <table id="gameTable">
         <tr>
             <th>Name</th>
             <th>Value</th>
@@ -55,10 +63,12 @@
         <tr>
             <td>Item 10 Name</td>
             <td>Item 10 Value</td>
-        </tr>
+        </tr>   
     </table>
     <div id="input-container">
-        <input type="text" placeholder="Guess...">
+        <input type="text" id="guessBox"placeholder="Guess...">
     </div>
+
+    <script src="script.js" type="module"></script>
 </body>
 </html>
