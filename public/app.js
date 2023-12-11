@@ -65,8 +65,9 @@ document.addEventListener("DOMContentLoaded", event => {
 function guessName(guess) {
     for (var i = 0; i < nameList.length; i++) {
         var answerWithoutColon = nameList[i].replace(':', '');
+        var answerWithExtraSpace = nameList[i] + ' ';
         console.log(`does ${answerWithoutColon} == ${guess}??`)
-        if (answerWithoutColon.toLowerCase() === guess.toLowerCase() || nameList[i].toLowerCase() === guess.toLowerCase()) {
+        if (cleanGuess(guess) === cleanGuess(nameList[i])) {
             var td = document.getElementById(i);
             td.classList.remove("hidden");
             td.classList.add("shown");
@@ -97,3 +98,29 @@ function revealNames() {
         td.classList.add("shown");
     }
 }
+
+function checkWin() {
+    for (let i = 0; i < nameList.length; i++) {
+        var td = document.getElementById(i);
+        if (td.classList.contains("hidden"))
+            return false;
+    }
+    return true;
+}
+
+
+function cleanGuess(guess) {
+    // Remove trailing spaces
+    guess = guess.trimRight();
+  
+    // Convert to lowercase
+    guess = guess.toLowerCase();
+  
+    // Remove colons
+    guess = guess.replace(/:/g, "");
+  
+    // Remove leading spaces
+    guess = guess.trimLeft();
+  
+    return guess;
+  }
