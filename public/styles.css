@@ -10,6 +10,7 @@
 }
 
 body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: var(--darkest);
     color: var(--lightest);
     padding: 0px;
@@ -38,15 +39,52 @@ body {
     color: var(--light);
 }
 
+#main {
+    width: 40%;
+    margin: auto;
+    height: 100%;
+}
+
 #main-table {
     width: 100%;
 }
 
 #main-table td {
     border-style: groove;
+    border-width: 1px;
     height: 30px;
+    padding: 10px;
 }
 
 #main-table td:nth-child(1) {
     text-align: center;
+    padding: 5px;
+}
+
+#input-box {
+    width: 40%;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#input-box input[type=text] {
+    font-size: 30px;
+    height: 100%;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+#input-box input[type=submit] {
+    font-size: 30px;
+    height: 100%;
+    margin: 5px;
+    background-color: var(--green);
+    border-radius: 10px;
+}
+
+.hidden {
+    user-select: none;
+    color: transparent;
 }

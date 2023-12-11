@@ -1,4 +1,7 @@
-
+var nameList;
+var valueList;
+var title;
+var source;
 document.addEventListener("DOMContentLoaded", event => {
     
     const app = firebase.app();
@@ -7,10 +10,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const list = db.collection('mainLists').doc("12-22-2023");
     const tableElement = document.getElementById("main-table");
-    var nameList;
-    var valueList;
-    var title;
-    var source;
+
 
     list.get().then((doc) => {
         if (doc.exists) {
@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", event => {
 
             const sourceElement = document.getElementById('source-text');
             sourceElement.textContent = source;
-            console.log(source);
             for (let i = 0; i < nameList.length; i++) {
                 const rowElement = document.createElement("tr");
                 const numberCellElement = document.createElement("td");
@@ -33,9 +32,11 @@ document.addEventListener("DOMContentLoaded", event => {
                 const valueCellElement = document.createElement("td");
               
                 numberCellElement.textContent = i+1;
+                nameCellElement.id = i;
                 nameCellElement.textContent = nameList[i];
                 valueCellElement.textContent = valueList[i];
 
+                nameCellElement.className = "hidden";
                 rowElement.appendChild(numberCellElement);
                 rowElement.appendChild(nameCellElement);
                 rowElement.appendChild(valueCellElement);
@@ -50,6 +51,15 @@ document.addEventListener("DOMContentLoaded", event => {
     });
 });
 
-
-    
-    
+function guessName(guess) {
+    for (var i = 0; i < nameList.length; i++) {
+        var answerWithoutColon = nameList[i].replace(':', '');
+        if (answerWithoutColon.toLowerCase() === guess.toLowerCase() || nameList[i].toLowerCase() === guess.toLowerCase()) {
+            var td = document.getElementById(i);
+            td.classList.toggle("hidden");
+            document.getElementById('text-field').value="";
+            return;
+        }
+    }
+    console.log('element not found');
+}
