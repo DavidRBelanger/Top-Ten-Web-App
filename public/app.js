@@ -2,6 +2,7 @@ var nameList;
 var valueList;
 var title;
 var source;
+var totalLives;
 document.addEventListener("DOMContentLoaded", event => {
     
     const app = firebase.app();
@@ -11,7 +12,6 @@ document.addEventListener("DOMContentLoaded", event => {
     const list = db.collection('mainLists').doc("12-22-2023");
     const tableElement = document.getElementById("main-table");
 
-
     list.get().then((doc) => {
         if (doc.exists) {
             console.log("Document data:", doc.data());
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", event => {
             valueList = doc.data().itemValues;
             title = doc.data().title;
             source = doc.data().source;
+            totalLives = doc.data().totalLives;
 
             const titleElement = document.getElementById('listTitle');
             titleElement.textContent = title;
@@ -42,7 +43,17 @@ document.addEventListener("DOMContentLoaded", event => {
                 rowElement.appendChild(valueCellElement);
                 
                 tableElement.appendChild(rowElement);
-              }
+            }
+
+            const div = document.getElementById('lives-box');
+            for (let i = 0; i < totalLives; i++) {
+                const button = document.createElement("button");
+                button.id = "life" + i;
+                button.classList.add("active-life");
+                div.appendChild(button);
+            }
+
+
         } else {
             console.log("No Such Document!");
         }
@@ -54,12 +65,35 @@ document.addEventListener("DOMContentLoaded", event => {
 function guessName(guess) {
     for (var i = 0; i < nameList.length; i++) {
         var answerWithoutColon = nameList[i].replace(':', '');
+        console.log(`does ${answerWithoutColon} == ${guess}??`)
         if (answerWithoutColon.toLowerCase() === guess.toLowerCase() || nameList[i].toLowerCase() === guess.toLowerCase()) {
             var td = document.getElementById(i);
-            td.classList.toggle("hidden");
+            td.classList.remove("hidden");
+            td.classList.add("shown");
             document.getElementById('text-field').value="";
+            console.log("correct guess")
             return;
         }
     }
-    console.log('element not found');
+    for (var i = totalLives - 1; i > 0; i--) {
+        const button = document.getElementById("life" + i);
+        if (button.classList.contains("active-life")) {
+            button.classList.add("inactive-life");
+            button.classList.remove("active-life");
+            return;
+        }
+    }
+    const button = document.getElementById("life" + i);
+    button.classList.add("inactive-life");
+    button.classList.remove("active-life");
+    revealNames();
+    console.log("Out of lives...");
+}
+
+function revealNames() {
+    for (let i = 0; i < nameList.length; i++) {
+        var td = document.getElementById(i);
+        td.classList.remove("hidden");
+        td.classList.add("shown");
+    }
 }

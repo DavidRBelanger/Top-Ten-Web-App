@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Top10Game</title>
+    <title>Welcome to Firebase Hosting</title>
     <link rel="stylesheet" href="styles.css">
 
     <!-- update the version number as needed -->
@@ -27,12 +27,29 @@
   </head>
   <body>
     <div id="toolbar">
-        <ul>
-            <li><a href="index.html"><strong>top10game.site</strong></a></li>
-            <li><a href="maingame.html">main game</a></li>
-        </ul>
-    </div>
-        
+      <ul>
+          <li><a href="index.html"><strong>top10game.site</strong></a></li>
+          <li><a href="maingame.html">main game</a></li>
+      </ul>
+  </div>
+    <div id="app">
+      <div id="title-container">
+        <h1 id="listTitle"></h1>
+        <h2 id="source-text"></h1>
+      </div>
+      <div id="main">
+        <table id="main-table"></table>
+      </div>
+      <div id="input-box">
+        <input id="text-field"type="text" placeholder="Guess...">
+        <input type="submit" onclick="guessName(document.getElementById('text-field').value)">
+      </div>
+      <h1 id="lives-title">Lives:</h1>
+      <div id="lives-box">
 
+      </div>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 </html>

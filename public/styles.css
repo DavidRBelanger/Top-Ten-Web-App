@@ -9,82 +9,306 @@
     --green: #61FFA6;
 }
 
-body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: var(--darkest);
-    color: var(--lightest);
-    padding: 0px;
+@media screen and (min-width: 1024px) {
+
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: var(--darkest);
+        color: var(--lightest);
+        margin: 0px;
+    }
+
+    #toolbar {
+        border-bottom-color: var(--lighter);
+        width: 100%;
+        margin: 0px;
+    }
+
+    #listTitle {
+        text-align: center;
+    }
+
+    #source-text {
+        text-align: center;
+        color: var(--light);
+    }
+
+    #main {
+        width: 40%;
+        margin: auto;
+        height: 100%;
+    }
+
+    #main-table {
+        width: 100%;
+    }
+
+    #main-table td {
+        border-style: groove;
+        border-width: 1px;
+        height: 30px;
+        padding: 10px;
+    }
+
+    #main-table td:nth-child(1) {
+        text-align: center;
+        padding: 5px;
+    }
+
+    #input-box {
+        width: 40%;
+        margin: auto;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #input-box input[type=text] {
+        font-size: 30px;
+        height: 100%;
+        margin: 5px;
+        border-radius: 10px;
+    }
+
+    #input-box input[type=submit] {
+        transition: 0.4s;
+        font-size: 30px;
+        height: 100%;
+        margin: 5px;
+        background-color: var(--green);
+        border-style: solid;
+        border-radius: 10px;
+        border-width: 1px;
+        border-color: white;
+    }
+
+    #input-box input[type=submit]:hover {
+        transition: 0.4s;
+        background-color: skyblue;
+    }
+
+    .hidden {
+        transition: 0.4s;
+        user-select: none;
+        color: transparent;
+    }
+
+    .shown {
+        transition: 0.4s;
+        user-select: text;
+        color: var(--white);
+    }
+
+    #lives-box {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    #lives-box button {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        pointer-events: none;
+    }
+
+    .active-life {
+        background-color: red;
+    }
+
+    .inactive-life {
+        transition: 0.4s;
+        background-color: gray;
+    }
+
+    #lives-title {
+        text-align: center;
+        margin: 0px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: var(--darker);
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+
+    }
+
+    li a:hover {
+        transition: 0.4s;
+        background-color: #111;
+        transition: 0.4s;
+    }
+
+    li a:not(:hover) {
+        transition: 0.4s;
+        background-color: var(--darker);
+    }
 }
 
-#toolbar {
-    border-bottom-style: groove;
-    border-bottom-color: var(--lighter);
-    width: 100%;
-    margin: 0px;
-    border-bottom-width: 2px;
-}
+@media screen and (max-width: 767px) {
 
-#toolbar h1 {
-    color: var(--lighter);
-    text-align: center;
-    font-size: 40px;
-}
 
-#listTitle {
-    text-align: center;
-}
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: var(--darker);
+    }
 
-#source-text {
-    text-align: center;
-    color: var(--light);
-}
+    li {
+        float: left;
+    }
 
-#main {
-    width: 40%;
-    margin: auto;
-    height: 100%;
-}
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 12px;
+    }
 
-#main-table {
-    width: 100%;
-}
+    li a:hover {
+        transition: 0.4s;
+        background-color: #111;
+        transition: 0.4s;
+    }
 
-#main-table td {
-    border-style: groove;
-    border-width: 1px;
-    height: 30px;
-    padding: 10px;
-}
+    li a:not(:hover) {
+        transition: 0.4s;
+        background-color: var(--darker);
+    }
 
-#main-table td:nth-child(1) {
-    text-align: center;
-    padding: 5px;
-}
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: var(--darkest);
+        color: var(--lightest);
+        margin: 0px;
+    }
 
-#input-box {
-    width: 40%;
-    margin: auto;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-}
+    #toolbar {
+        border-bottom-color: var(--lighter);
+        width: 100%;
+        margin: 0px;
+    }
 
-#input-box input[type=text] {
-    font-size: 30px;
-    height: 100%;
-    margin: 5px;
-    border-radius: 10px;
-}
+    #listTitle {
+        text-align: center;
+        font-size: 20px;
+    }
 
-#input-box input[type=submit] {
-    font-size: 30px;
-    height: 100%;
-    margin: 5px;
-    background-color: var(--green);
-    border-radius: 10px;
-}
+    #source-text {
+        text-align: center;
+        color: var(--light);
+        font-size: 12px;
+    }
 
-.hidden {
-    user-select: none;
-    color: transparent;
+    #main {
+        width: 100%;
+        height: 100%;
+        font-size: 10px;
+    }
+
+    #main table {
+        width: 100%;
+    }
+
+    #main-table td {
+        border-style: groove;
+        border-width: 1px;
+        height: 30px;
+        padding: 10px;
+    }
+
+    #main-table td:nth-child(1) {
+        text-align: center;
+        padding: 5px;
+    }
+
+    #input-box {
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #input-box input[type=text] {
+        font-size: 20px;
+        height: 100%;
+        margin: 5px;
+        border-radius: 10px;
+    }
+
+    #input-box input[type=submit] {
+        transition: 0.4s;
+        font-size: 20px;
+        height: 100%;
+        margin: 5px;
+        background-color: var(--green);
+        border-style: solid;
+        border-radius: 10px;
+        border-width: 1px;
+        border-color: white;
+    }
+
+    #input-box input[type=submit]:hover {
+        transition: 0.4s;
+        background-color: skyblue;
+    }
+
+    .hidden {
+        transition: 0.4s;
+        user-select: none;
+        color: transparent;
+    }
+
+    .shown {
+        transition: 0.4s;
+        user-select: text;
+        color: var(--white);
+    }
+
+    #lives-box {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    #lives-box button {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        pointer-events: none;
+    }
+
+    .active-life {
+        background-color: red;
+    }
+
+    .inactive-life {
+        transition: 0.4s;
+        background-color: gray;
+    }
+
+    #lives-title {
+        text-align: center;
+        margin: 0px;
+    }
 }
