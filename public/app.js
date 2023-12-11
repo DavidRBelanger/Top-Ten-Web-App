@@ -64,9 +64,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
 function guessName(guess) {
     for (var i = 0; i < nameList.length; i++) {
-        var answerWithoutColon = nameList[i].replace(':', '');
-        var answerWithExtraSpace = nameList[i] + ' ';
-        console.log(`does ${answerWithoutColon} == ${guess}??`)
+        console.log(`does ${cleanGuess(nameList[i])} === ${cleanGuess(guess)}??`)
         if (cleanGuess(guess) === cleanGuess(nameList[i])) {
             var td = document.getElementById(i);
             td.classList.remove("hidden");
