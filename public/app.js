@@ -36,14 +36,10 @@ document.addEventListener("DOMContentLoaded", event => {
                 nameCellElement.textContent = nameList[i];
                 valueCellElement.textContent = valueList[i];
 
-                console.log(numberCellElement);
                 rowElement.appendChild(numberCellElement);
-                console.log(nameCellElement);
                 rowElement.appendChild(nameCellElement);
-                console.log(valueCellElement);
                 rowElement.appendChild(valueCellElement);
                 
-                console.log(rowElement);
                 tableElement.appendChild(rowElement);
               }
         } else {
