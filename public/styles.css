@@ -10,5 +10,43 @@
 }
 
 body {
-    background-color: --darkest;
+    background-color: var(--darkest);
+    color: var(--lightest);
+    padding: 0px;
+}
+
+#toolbar {
+    border-bottom-style: groove;
+    border-bottom-color: var(--lighter);
+    width: 100%;
+    margin: 0px;
+    border-bottom-width: 2px;
+}
+
+#toolbar h1 {
+    color: var(--lighter);
+    text-align: center;
+    font-size: 40px;
+}
+
+#listTitle {
+    text-align: center;
+}
+
+#source-text {
+    text-align: center;
+    color: var(--light);
+}
+
+#main-table {
+    width: 100%;
+}
+
+#main-table td {
+    border-style: groove;
+    height: 30px;
+}
+
+#main-table td:nth-child(1) {
+    text-align: center;
 }

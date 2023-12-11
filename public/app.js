@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", event => {
     const db = firebase.firestore();
 
     const list = db.collection('mainLists').doc("12-22-2023");
-    const tableElement = document.getElementById("myTable");
+    const tableElement = document.getElementById("main-table");
     var nameList;
     var valueList;
     var title;
@@ -28,12 +28,15 @@ document.addEventListener("DOMContentLoaded", event => {
             console.log(source);
             for (let i = 0; i < nameList.length; i++) {
                 const rowElement = document.createElement("tr");
+                const numberCellElement = document.createElement("td");
                 const nameCellElement = document.createElement("td");
                 const valueCellElement = document.createElement("td");
               
+                numberCellElement.textContent = i+1;
                 nameCellElement.textContent = nameList[i];
                 valueCellElement.textContent = valueList[i];
-                
+
+                rowElement.appendChild(numberCellElement);
                 rowElement.appendChild(nameCellElement);
                 rowElement.appendChild(valueCellElement);
                 
