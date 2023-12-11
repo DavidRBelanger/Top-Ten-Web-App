@@ -1,0 +1,14 @@
+:root {
+    --darkest: #22262A;
+    --darker: #424B54;
+    --dark: #56636F;
+    --light: #BABABA;
+    --lighter: #D1D1D1;
+    --lightest: #FFFFFF;
+    --red: #FF5B5B;
+    --green: #61FFA6;
+}
+
+body {
+    background-color: --darkest;
+}
