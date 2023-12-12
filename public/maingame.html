@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to Firebase Hosting</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="maingamestyles.css">
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/10.7.1/firebase-app-compat.js"></script>
@@ -39,6 +39,16 @@
       </div>
       <div id="main">
         <table id="main-table"></table>
+      </div>
+      <div id="leaderboard-popup">
+        <div id="result">
+          <h1 id="result">Result</h1>
+        </div>
+        <div id="leaderboard-popup-inputs">
+          <h1>Submit to the Leaderboard:</h1>
+          <input type="text" placeholder="Name" id="leaderboardInput">
+          <input type="submit" onclick="addToLeaderboard(document.getElementById('leaderboardInput').value)">
+        </div>
       </div>
       <div id="input-box">
         <input id="text-field"type="text" placeholder="Guess...">

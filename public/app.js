@@ -3,15 +3,19 @@ var valueList;
 var title;
 var source;
 var totalLives;
+var score = 0;
+var app;
+
+var db;
+
+var list;
+const tableElement = document.getElementById("main-table");
+
 document.addEventListener("DOMContentLoaded", event => {
-    
-    const app = firebase.app();
-
-    const db = firebase.firestore();
-
-    const list = db.collection('mainLists').doc("12-22-2023");
-    const tableElement = document.getElementById("main-table");
-
+    score = 0;
+    app = firebase.app();
+    db = firebase.firestore();
+    list = db.collection('mainLists').doc('test');
     list.get().then((doc) => {
         if (doc.exists) {
             console.log("Document data:", doc.data());
@@ -31,8 +35,8 @@ document.addEventListener("DOMContentLoaded", event => {
                 const numberCellElement = document.createElement("td");
                 const nameCellElement = document.createElement("td");
                 const valueCellElement = document.createElement("td");
-              
-                numberCellElement.textContent = i+1;
+
+                numberCellElement.textContent = i + 1;
                 nameCellElement.id = i;
                 nameCellElement.textContent = nameList[i];
                 valueCellElement.textContent = valueList[i];
@@ -41,7 +45,7 @@ document.addEventListener("DOMContentLoaded", event => {
                 rowElement.appendChild(numberCellElement);
                 rowElement.appendChild(nameCellElement);
                 rowElement.appendChild(valueCellElement);
-                
+
                 tableElement.appendChild(rowElement);
             }
 
@@ -63,62 +67,114 @@ document.addEventListener("DOMContentLoaded", event => {
 });
 
 function guessName(guess) {
+    var scored = false;
     for (var i = 0; i < nameList.length; i++) {
-        console.log(`does ${cleanGuess(nameList[i])} === ${cleanGuess(guess)}??`)
         if (cleanGuess(guess) === cleanGuess(nameList[i])) {
             var td = document.getElementById(i);
             td.classList.remove("hidden");
             td.classList.add("shown");
-            document.getElementById('text-field').value="";
-            console.log("correct guess")
-            return;
+            document.getElementById('text-field').value = "";
+            score++;
+            scored = true;
+            break;
         }
     }
-    for (var i = totalLives - 1; i > 0; i--) {
-        const button = document.getElementById("life" + i);
-        if (button.classList.contains("active-life")) {
-            button.classList.add("inactive-life");
-            button.classList.remove("active-life");
-            return;
+    if (checkWin()) {
+        console.log('game won');
+        document.getElementById('leaderboard-popup').style.display = "block";
+        document.getElementById("result").textContent = score + " points!"
+    } else if (!scored) {
+        for (var i = totalLives - 1; i > 0; i--) {
+            const button = document.getElementById("life" + i);
+            if (button.classList.contains("active-life")) {
+                button.classList.add("inactive-life");
+                button.classList.remove("active-life");
+                return;
+            }
+        }
+        document.getElementById('leaderboard-popup').style.display = "block";
+        document.getElementById("result").textContent = score + " points!"
+
+    }
+}
+
+    function revealNames() {
+        for (let i = 0; i < nameList.length; i++) {
+            var td = document.getElementById(i);
+            td.classList.remove("hidden");
+            td.classList.add("shown");
         }
     }
-    const button = document.getElementById("life" + i);
-    button.classList.add("inactive-life");
-    button.classList.remove("active-life");
-    revealNames();
-    console.log("Out of lives...");
-}
 
-function revealNames() {
-    for (let i = 0; i < nameList.length; i++) {
-        var td = document.getElementById(i);
-        td.classList.remove("hidden");
-        td.classList.add("shown");
+    function checkWin() {
+        for (let i = 0; i < nameList.length; i++) {
+            var td = document.getElementById(i);
+            if (td.classList.contains("hidden"))
+                return false;
+        }
+        return true;
     }
-}
 
-function checkWin() {
-    for (let i = 0; i < nameList.length; i++) {
-        var td = document.getElementById(i);
-        if (td.classList.contains("hidden"))
-            return false;
+
+    function cleanGuess(guess) {
+        // Remove trailing spaces
+        guess = guess.trimRight();
+
+        // Convert to lowercase
+        guess = guess.toLowerCase();
+
+        // Remove colons
+        guess = guess.replace(/:/g, "");
+
+        // Remove leading spaces
+        guess = guess.trimLeft();
+
+        return guess;
     }
-    return true;
-}
 
+    function addToLeaderboard(name) {
+        const player = createPlayer(name, score);
+        console.log(player);
+        // Get the current leaderboard
+        list.get()
+            .then((doc) => {
+                const existingLeaderboard = doc.data().leaderboard || [];
+                existingLeaderboard.push(player);
 
-function cleanGuess(guess) {
-    // Remove trailing spaces
-    guess = guess.trimRight();
-  
-    // Convert to lowercase
-    guess = guess.toLowerCase();
-  
-    // Remove colons
-    guess = guess.replace(/:/g, "");
-  
-    // Remove leading spaces
-    guess = guess.trimLeft();
-  
-    return guess;
-  }
+                // Update the document with the updated leaderboard
+                list.update({ leaderboard: existingLeaderboard })
+                    .then(() => {
+                        console.log('Player added to leaderboard successfully!');
+                    })
+                    .catch((error) => {
+                        console.error('Error adding player to leaderboard:', error);
+                    });
+            })
+            .catch((error) => {
+                console.error('Error getting leaderboard:', error);
+            });
+        document.getElementById('leaderboard-popup').style.display = "none";
+    }
+    function createPlayer(name, score) {
+        return {
+            name: name,
+            score: score,
+        };
+    }
+
+    function getFormattedDate() {
+        // Get today's date object
+        const today = new Date();
+
+        // Extract year, month, and day (remember, months start at 0 in JavaScript)
+        const year = today.getFullYear();
+        let month = today.getMonth() + 1; // Add 1 to get actual month
+        let day = today.getDate();
+
+        // Pad month and day if less than 10
+        if (month < 10) month = `0${month}`;
+        if (day < 10) day = `0${day}`;
+
+        // Build and return the formatted date string
+        return `${month}-${day}-${year}`;
+    }

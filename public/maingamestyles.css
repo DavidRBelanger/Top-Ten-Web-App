@@ -68,6 +68,9 @@
         height: 100%;
         margin: 5px;
         border-radius: 10px;
+        background: var(--darker);
+        border-style: none;
+        color: white;
     }
 
     #input-box input[type=submit] {
@@ -78,8 +81,6 @@
         background-color: var(--green);
         border-style: solid;
         border-radius: 10px;
-        border-width: 1px;
-        border-color: white;
     }
 
     #input-box input[type=submit]:hover {
@@ -157,6 +158,49 @@
     li a:not(:hover) {
         transition: 0.4s;
         background-color: var(--darker);
+    }
+
+    #leaderboard-popup {
+        position: fixed;
+        background-color: var(--darkest);
+        display: none;
+        top: 20%;
+        left: 40%;
+        width: 20%;
+        height: 25%;
+        border-radius: 20px;
+        border: 2px solid white;
+        text-align: center;
+    }
+
+    #leaderboard-popup input[type=text] {
+        border-radius: 10px;
+        font-size: 25px;
+        background: var(--darker);
+        border-style: none;
+        color: white;
+        margin: auto;
+    }
+
+    #leaderboard-popup input[type=submit] {
+        margin-top: 10px;
+        background: var(--green);
+        color: var(--darkest);
+        font-size: 25px;
+        border-radius: 10px;
+    }
+
+    #leaderboard-popup-inputs {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    #result h1 {
+        margin: 40px;
+    }
+
+    #leaderboard-popup-inputs h1 {
+        font-size: 20px;
     }
 }
 
