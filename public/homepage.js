@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", event => {
         if (doc.exists) {
             console.log('doc exists');
             const leaderList = doc.data().leaderboard;
-
+            const todayTitle = doc.data().title;
+            document.getElementById('todayTitle').textContent += todayTitle;
             //analyse this code
             for (var i = 0; i < leaderList.length; i++) {
                 const tr = document.createElement('tr');
