@@ -106,7 +106,6 @@
     }
     
     #table-container {
-        height: 200px;
         border: 2px solid white;
     }
     
@@ -237,3 +236,7 @@
         
     }
 }
+
+.transition{
+    transition: all 0.3s ease 0.1s;
+     }

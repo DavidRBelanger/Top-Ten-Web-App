@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", event => {
-
+    
     const app = firebase.app();
 
     const db = firebase.firestore();
@@ -31,7 +31,11 @@ document.addEventListener("DOMContentLoaded", event => {
                 td2.textContent = leaderList[i].score;
                 tr.appendChild(td1);
                 tr.appendChild(td2);
+                tr.classList.add("transistion");
                 leaderboardTable.appendChild(tr);
+                if (i> 10) {
+                    break;
+                }
             }
             console.log(leaderList);
         } else {

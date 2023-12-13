@@ -8,60 +8,247 @@
     --red: #FF5B5B;
     --green: #61FFA6;
 }
-@media screen and (max-width: 767px) { /* mobile devices */
-    body {
-        background-color: var(--darkest);
-        margin: 0px;
-        color: white;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        text-align: center;
-        width: 100vw;
-        box-sizing: border-box;
-    }
 
-    main {
-        width: 100%; 
-        position: relative;
-    }
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: var(--darker);
-    }
-    
-    li {
-        float: left;
-    }
-    
-    li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-    
-    li a:hover {
-        transition: 0.4s;
-        background-color: #111;
-        transition: 0.4s;
-    }
-    
-    li a:not(:hover) {
-        transition: 0.4s;
-        background-color: var(--darker);
-    }
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: var(--darkest);
+    color: var(--lightest);
+    margin: 0px;
+}
 
-    table {
+#toolbar {
+    border-bottom-color: var(--lighter);
+    width: 100%;
+    margin: 0px;
+}
+
+#listTitle {
+    text-align: center;
+}
+
+#source-text {
+    text-align: center;
+    color: var(--light);
+}
+
+#main-table {
+    width: 100%;
+}
+
+#main-table td {
+    border-style: groove;
+    border-width: 1px;
+    height: 20px;
+    padding: 10px;
+}
+
+#main-table td:nth-child(1) {
+    text-align: center;
+    padding: 5px;
+    width: 20px;
+}
+
+#input-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#input-box input[type=text] {
+    font-size: 20px;
+    padding: 5px 20px;
+    height: 100%;
+    margin: 5px;
+    border-radius: 10px;
+    background: var(--darker);
+    border-style: none;
+    color: white;
+}
+
+#input-box input[type=submit] {
+    transition: 0.4s;
+    font-size: 20px;
+    padding: 5px 20px;
+    height: 100%;
+    margin: 5px;
+    background-color: var(--green);
+    border: none;
+    border-radius: 10px;
+}
+
+#input-box input[type=submit]:hover {
+    transition: 0.4s;
+    background-color: var(--light);
+}
+
+.hidden {
+    transition: 0.4s;
+    user-select: none;
+    color: transparent;
+}
+
+.shown {
+    transition: 0.4s;
+    user-select: text;
+    color: var(--white);
+}
+
+#lives-box {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+
+}
+
+#lives-box button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    margin: 5px;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.active-life {
+    background-color: red;
+}
+
+.inactive-life {
+    transition: 0.4s;
+    background-color: gray;
+}
+
+#lives-title {
+    text-align: center;
+    margin: 0px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--darker);
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+li a:hover {
+    transition: 0.4s;
+    background-color: #111;
+    transition: 0.4s;
+}
+
+li a:not(:hover) {
+    transition: 0.4s;
+    background-color: var(--darker);
+}
+
+
+#leaderboard-popup input[type=text] {
+    border-radius: 10px;
+    font-size: 20px;
+    background: var(--darker);
+    border-style: none;
+    color: white;
+}
+
+#leaderboard-popup input[type=submit] {
+    margin-top: 10px;
+    background: var(--green);
+    color: var(--darkest);
+    font-size: 20px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+
+#result h1 {
+    margin: 40px;
+}
+
+#leaderboard-popup-inputs h1 {
+    font-size: 20px;
+}
+
+@media screen and (min-width: 1024px) {
+    #main {
+        width: 40%;
         margin: auto;
-        width: 80%;
+        height: 100%;
     }
 
-    td, th {
-        border: solid 2px white;
+    #leaderboard-popup {
+        position: fixed;
+        background-color: var(--darkest);
+        display: none;
+        top: 40%;
+        left: 10%;
+        width: 80%;
+        height: 25%;
+        border-radius: 20px;
+        border: 2px solid white;
+        text-align: center;
         padding: 10px;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+
+
+    #toolbar {
+        border-bottom-color: var(--lighter);
+        width: 100%;
+        margin: 0px;
+    }
+
+
+    #main {
+        width: 100%;
+        height: 100%;
+        font-size: 15px;
+        text-align: center;
+    }
+
+
+    #main-table {
+        width: 90%;
+        margin: 0px 20px;
+    }
+    #leaderboard-popup {
+        position: fixed;
+        background-color: var(--darkest);
+        display: none;
+        top: 20%;
+        left: 10%;
+        height: 25%;
+        right: 10%;
+        border-radius: 20px;
+        border: 2px solid white;
+        text-align: center;
+        padding: 30px;
+    }
+
+    td {
+        font-size: 8px;
+    }
+
+    #input-box {
+        width: 100%;
+        margin-left: 10px;
     }
 
 }
