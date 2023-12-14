@@ -37,7 +37,7 @@ body {
 
 #main-table td {
     border-style: groove;
-    border-width: 1px;
+    border-width: 3px;
     height: 20px;
     padding: 10px;
 }
@@ -241,14 +241,15 @@ li a:not(:hover) {
         position: fixed;
         background-color: var(--darkest);
         display: none;
-        top: 20%;
-        left: 10%;
-        height: 25%;
-        right: 10%;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%; /* Adjust the width value as needed */
+        height: 30%;
         border-radius: 20px;
         border: 2px solid white;
         text-align: center;
-        padding: 30px;
+        padding: 10px;
     }
 
     td {

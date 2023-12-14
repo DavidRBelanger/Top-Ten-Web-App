@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const db = firebase.firestore();
 
-    const list = db.collection('mainLists').doc('test'); //gets today's 
+    const list = db.collection('mainLists').doc('12-22-2023'); //gets today's 
 
     const th1 = document.createElement('th');
     th1.textContent = 'Name';
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", event => {
             const leaderList = doc.data().leaderboard;
             const todayTitle = doc.data().title;
             document.getElementById('todayTitle').textContent += todayTitle;
-            //analyse this code
             for (var i = 0; i < leaderList.length; i++) {
                 const tr = document.createElement('tr');
                 const td1 = document.createElement('td');
