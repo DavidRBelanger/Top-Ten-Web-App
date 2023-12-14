@@ -207,8 +207,6 @@ li a:not(:hover) {
 }
 
 @media screen and (max-width: 767px) {
-
-@media screen and (max-width: 767px) {
     #main {
         width: 100%;
         height: auto;
@@ -220,8 +218,6 @@ li a:not(:hover) {
         height: auto;
         padding: 20px;
     }
-}
-
     #toolbar {
         border-bottom-color: var(--lighter);
         width: 100%;
@@ -259,9 +255,19 @@ li a:not(:hover) {
         font-size: 8px;
     }
 
-    #input-box {
-        width: 100%;
-        margin-left: 10px;
+    #input-box input[type=text] {
+        padding: 5px 20px;
+        height: 100%;
+        margin: 5px;
+        border-radius: 10px;
+        background: var(--darker);
+        border-style: none;
+        color: white;
+        width: 120%; /* Adjust the width value as needed */
     }
 
+    #input-box {
+        width: 90%;
+        margin-left: 20px;
+    }
 }
