@@ -66,6 +66,13 @@ document.addEventListener("DOMContentLoaded", event => {
     });
 });
 
+textField.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        guessName(textField.value);
+    }
+})
+
+
 function guessName(guess) {
     var scored = false;
     document.getElementById("text-field").focus();
