@@ -212,12 +212,6 @@ li a:not(:hover) {
         height: auto;
     }
 
-    #leaderboard-popup {
-        top: 10%;
-        width: 80%;
-        height: auto;
-        padding: 20px;
-    }
     #toolbar {
         border-bottom-color: var(--lighter);
         width: 100%;
@@ -270,5 +264,9 @@ li a:not(:hover) {
     #input-box {
         width: 90%;
         margin-left: 20px;
+    }
+
+    #leaderboard-popup input {
+        padding: 10px;
     }
 }
