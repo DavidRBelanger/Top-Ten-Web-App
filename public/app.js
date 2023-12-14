@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
 function guessName(guess) {
     var scored = false;
+    document.getElementById("text-field").focus();
     for (var i = 0; i < nameList.length; i++) {
         if (cleanGuess(guess) === cleanGuess(nameList[i])) {
             var td = document.getElementById(i);
@@ -83,6 +84,7 @@ function guessName(guess) {
         console.log('game won');
         document.getElementById('leaderboard-popup').style.display = "block";
         document.getElementById("result").textContent = score + " points!"
+        document.getElementById("leaderboardInput").focus();
     } else if (!scored) {
         for (var i = totalLives - 1; i > 0; i--) {
             const button = document.getElementById("life" + i);

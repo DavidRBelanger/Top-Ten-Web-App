@@ -194,20 +194,33 @@ li a:not(:hover) {
         position: fixed;
         background-color: var(--darkest);
         display: none;
-        top: 40%;
-        left: 10%;
-        width: 80%;
-        height: 25%;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30%;
+        height: 30%;
         border-radius: 20px;
         border: 2px solid white;
         text-align: center;
         padding: 10px;
     }
-
 }
 
 @media screen and (max-width: 767px) {
 
+@media screen and (max-width: 767px) {
+    #main {
+        width: 100%;
+        height: auto;
+    }
+
+    #leaderboard-popup {
+        top: 10%;
+        width: 80%;
+        height: auto;
+        padding: 20px;
+    }
+}
 
     #toolbar {
         border-bottom-color: var(--lighter);
