@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="/__/firebase/10.7.1/firebase-app-compat.js"></script>
+
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="/__/firebase/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+    <label for="Title">Title:</label>
+    <input type="text" id="Title">
+    <label for="Source">Source:</label>
+    <input type="text" id="Source">
+    <label for="Lives">Lives:</label>
+    <input type="Lives" id="Lives">
+    <label for="ID">ID: </label>
+    <input type="text" id="ID">
+    <ul>
+        <li>
+        <li>
+            <label for="name1">Item 1 Name:</label>
+            <input type="text" id="name1">
+        </li>
+        <li>
+            <label for="name2">Item 2 Name:</label>
+            <input type="text" id="name2">
+        </li>
+        <li>
+            <label for="name3">Item 3 Name:</label>
+            <input type="text" id="name3">
+        </li>
+        <li>
+            <label for="name4">Item 4 Name:</label>
+            <input type="text" id="name4">
+        </li>
+        <li>
+            <label for="name5">Item 5 Name:</label>
+            <input type="text" id="name5">
+        </li>
+        <li>
+            <label for="name6">Item 6 Name:</label>
+            <input type="text" id="name6">
+        </li>
+        <li>
+            <label for="name7">Item 7 Name:</label>
+            <input type="text" id="name7">
+        </li>
+        <li>
+            <label for="name8">Item 8 Name:</label>
+            <input type="text" id="name8">
+        </li>
+        <li>
+            <label for="name9">Item 9 Name:</label>
+            <input type="text" id="name9">
+        </li>
+        <li>
+            <label for="name10">Item 10 Name:</label>
+            <input type="text" id="name10">
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <label for="value1">Item 1 Value:</label>
+            <input type="text" id="value1">
+        </li>
+        <li>
+            <label for="value2">Item 2 Value:</label>
+            <input type="text" id="value2">
+        </li>
+        <li>
+            <label for="value3">Item 3 Value:</label>
+            <input type="text" id="value3">
+        </li>
+        <li>
+            <label for="value4">Item 4 Value:</label>
+            <input type="text" id="value4">
+        </li>
+        <li>
+            <label for="value5">Item 5 Value:</label>
+            <input type="text" id="value5">
+        </li>
+        <li>
+            <label for="value6">Item 6 Value:</label>
+            <input type="text" id="value6">
+        </li>
+        <li>
+            <label for="value7">Item 7 Value:</label>
+            <input type="text" id="value7">
+        </li>
+        <li>
+            <label for="value8">Item 8 Value:</label>
+            <input type="text" id="value8">
+        </li>
+        <li>
+            <label for="value9">Item 9 Value:</label>
+            <input type="text" id="value9">
+        </li>
+        <li>
+            <label for="value10">Item 10 Value:</label>
+            <input type="text" id="value10">
+        </li>
+        </li>
+    </ul>
+    <button onclick="createList()">Submit</button>
+    <script>
+        var app;
+        var db;
+        var mainLists;
+        document.addEventListener("DOMContentLoaded", event => {
+            app = firebase.app();
+            console.log(app);
+            db = firebase.firestore();
+            mainLists = db.collection('mainLists');
+        })
+        function createList() {
+            var nameList = [];
+            var valueList = [];
+            var title = document.getElementById("Title").value;
+            var source = document.getElementById("Source").value;
+            var lives = document.getElementById("Lives").value;
+            for (var i = 1; i <= 10; i++) {
+                var nameInput = document.getElementById("name" + i);
+                var valueInput = document.getElementById("value" + i);
+
+                nameList.push(nameInput.value);
+                valueList.push(valueInput.value);
+            }
+
+
+            mainLists.doc(document.getElementById("ID").value).set({
+                title: title,
+                source: source,
+                totalLives: lives,
+                itemNames: nameList,
+                itemValues: valueList
+            });
+        }
+    </script>
+</body>
+
+</html>

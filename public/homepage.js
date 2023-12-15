@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const db = firebase.firestore();
 
-    const list = db.collection('mainLists').doc('12-22-2023'); //gets today's 
+    const list = db.collection('mainLists').doc(getRandomList()); //gets a random list to do.
 
     const th1 = document.createElement('th');
     th1.textContent = 'Name';
@@ -46,20 +46,6 @@ document.addEventListener("DOMContentLoaded", event => {
 });
 
 
-function getFormattedDate() {
-    // Get today's date object
-    const today = new Date();
-  
-    // Extract year, month, and day (remember, months start at 0 in JavaScript)
-    const year = today.getFullYear();
-    let month = today.getMonth() + 1; // Add 1 to get actual month
-    let day = today.getDate();
-  
-    // Pad month and day if less than 10
-    if (month < 10) month = `0${month}`;
-    if (day < 10) day = `0${day}`;
-  
-    // Build and return the formatted date string
-    return `${month}-${day}-${year}`;
-  }
-  
+function getRandomList() {
+    return "list" + Math.floor(Math.random()*76) + 1;
+}

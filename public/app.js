@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", event => {
     score = 0;
     app = firebase.app();
     db = firebase.firestore();
-    list = db.collection('mainLists').doc('12-22-2023');
+    list = db.collection('mainLists').doc('test');
     list.get().then((doc) => {
         if (doc.exists) {
             console.log("Document data:", doc.data());
