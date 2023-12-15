@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const db = firebase.firestore();
 
-    const list = db.collection('mainLists').doc(getRandomList()); //gets a random list to do.
+    const list = db.collection('mainLists').doc('test'); //gets a random list to do.
 
     const th1 = document.createElement('th');
     th1.textContent = 'Name';
@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", event => {
             const leaderList = doc.data().leaderboard;
             const todayTitle = doc.data().title;
             document.getElementById('todayTitle').textContent += todayTitle;
+
+            // Sort leaderboard by score
+            leaderList.sort((a, b) => b.score - a.score);
+
             for (var i = 0; i < leaderList.length; i++) {
                 const tr = document.createElement('tr');
                 const td1 = document.createElement('td');
@@ -32,7 +36,7 @@ document.addEventListener("DOMContentLoaded", event => {
                 tr.appendChild(td2);
                 tr.classList.add("transistion");
                 leaderboardTable.appendChild(tr);
-                if (i> 10) {
+                if (i > 10) {
                     break;
                 }
             }

@@ -70,13 +70,15 @@ function guessName(guess) {
     var scored = false;
     document.getElementById("text-field").focus();
     for (var i = 0; i < nameList.length; i++) {
-        if (cleanGuess(guess) === cleanGuess(nameList[i])) {
+        if (checkGuess(guess, nameList[i])) {
             var td = document.getElementById(i);
-            td.classList.remove("hidden");
-            td.classList.add("shown");
-            document.getElementById('text-field').value = "";
-            score++;
             scored = true;
+            if (td.classList.contains("hidden")) {
+                td.classList.remove("hidden");
+                td.classList.add("shown");
+                document.getElementById('text-field').value = "";
+                score++;
+            }
             break;
         }
     }
@@ -100,83 +102,95 @@ function guessName(guess) {
     }
 }
 
-    function revealNames() {
-        for (let i = 0; i < nameList.length; i++) {
-            var td = document.getElementById(i);
-            td.classList.remove("hidden");
-            td.classList.add("shown");
-        }
+function revealNames() {
+    for (let i = 0; i < nameList.length; i++) {
+        var td = document.getElementById(i);
+        td.classList.remove("hidden");
+        td.classList.add("shown");
     }
+}
 
-    function checkWin() {
-        for (let i = 0; i < nameList.length; i++) {
-            var td = document.getElementById(i);
-            if (td.classList.contains("hidden"))
-                return false;
-        }
-        return true;
+function checkWin() {
+    for (let i = 0; i < nameList.length; i++) {
+        var td = document.getElementById(i);
+        if (td.classList.contains("hidden"))
+            return false;
     }
+    return true;
+}
 
 
-    function cleanGuess(guess) {
-        // Remove trailing spaces
-        guess = guess.trimRight();
+function cleanGuess(guess) {
+    // Remove trailing spaces
+    guess = guess.trimRight();
 
-        // Convert to lowercase
-        guess = guess.toLowerCase();
+    // Convert to lowercase
+    guess = guess.toLowerCase();
 
-        // Remove colons
-        guess = guess.replace(/:/g, "");
+    // Remove colons
+    guess = guess.replace(/:/g, "");
 
-        // Remove leading spaces
-        guess = guess.trimLeft();
+    // Remove leading spaces
+    guess = guess.trimLeft();
 
-        return guess;
-    }
+    return guess;
+}
 
-    function addToLeaderboard(name) {
-        const player = createPlayer(name, score);
-        console.log(player);
-        // Get the current leaderboard
-        list.get()
-            .then((doc) => {
-                const existingLeaderboard = doc.data().leaderboard || [];
-                existingLeaderboard.push(player);
+function checkGuess(guess1, guess2) {
+    guess1 = cleanGuess(guess1);
+    guess2 = cleanGuess(guess2);
 
-                // Update the document with the updated leaderboard
-                list.update({ leaderboard: existingLeaderboard })
-                    .then(() => {
-                        console.log('Player added to leaderboard successfully!');
-                    })
-                    .catch((error) => {
-                        console.error('Error adding player to leaderboard:', error);
-                    });
-            })
-            .catch((error) => {
-                console.error('Error getting leaderboard:', error);
-            });
-        document.getElementById('leaderboard-popup').style.display = "none";
-    }
-    function createPlayer(name, score) {
-        return {
-            name: name,
-            score: score,
-        };
-    }
+    const words1 = guess1.split(" ");
+    const words2 = guess2.split(" ");
 
-    function getFormattedDate() {
-        // Get today's date object
-        const today = new Date();
+    const matchingWords = words1.filter(word => words2.includes(word));
 
-        // Extract year, month, and day (remember, months start at 0 in JavaScript)
-        const year = today.getFullYear();
-        let month = today.getMonth() + 1; // Add 1 to get actual month
-        let day = today.getDate();
+    return guess1 === guess2 || matchingWords.length >= Math.ceil(words1.length / 2);
+}
 
-        // Pad month and day if less than 10
-        if (month < 10) month = `0${month}`;
-        if (day < 10) day = `0${day}`;
+function addToLeaderboard(name) {
+    const player = createPlayer(name, score);
+    console.log(player);
+    // Get the current leaderboard
+    list.get()
+        .then((doc) => {
+            const existingLeaderboard = doc.data().leaderboard || [];
+            existingLeaderboard.push(player);
 
-        // Build and return the formatted date string
-        return `${month}-${day}-${year}`;
-    }
+            // Update the document with the updated leaderboard
+            list.update({ leaderboard: existingLeaderboard })
+                .then(() => {
+                    console.log('Player added to leaderboard successfully!');
+                })
+                .catch((error) => {
+                    console.error('Error adding player to leaderboard:', error);
+                });
+        })
+        .catch((error) => {
+            console.error('Error getting leaderboard:', error);
+        });
+    document.getElementById('leaderboard-popup').style.display = "none";
+}
+function createPlayer(name, score) {
+    return {
+        name: name,
+        score: score,
+    };
+}
+
+function getFormattedDate() {
+    // Get today's date object
+    const today = new Date();
+
+    // Extract year, month, and day (remember, months start at 0 in JavaScript)
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1; // Add 1 to get actual month
+    let day = today.getDate();
+
+    // Pad month and day if less than 10
+    if (month < 10) month = `0${month}`;
+    if (day < 10) day = `0${day}`;
+
+    // Build and return the formatted date string
+    return `${month}-${day}-${year}`;
+}
