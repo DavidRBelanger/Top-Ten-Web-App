@@ -10,12 +10,12 @@ var db;
 
 var list;
 const tableElement = document.getElementById("main-table");
-
+const textField = document.getElementById("text-field");
 document.addEventListener("DOMContentLoaded", event => {
     score = 0;
     app = firebase.app();
     db = firebase.firestore();
-    list = db.collection('mainLists').doc('test');
+    list = db.collection('mainLists').doc('list2');
     list.get().then((doc) => {
         if (doc.exists) {
             console.log("Document data:", doc.data());
@@ -66,6 +66,32 @@ document.addEventListener("DOMContentLoaded", event => {
     });
 });
 
+textField.addEventListener("input", function() {
+    var guess = document.getElementById('text-field').value;
+    var scored = false;
+    for (var i = 0; i < nameList.length; i++) {
+        if (checkGuess(guess, nameList[i])) {
+            var td = document.getElementById(i);
+            scored = true;
+            if (td.classList.contains("hidden")) {
+                td.classList.remove("hidden");
+                td.classList.add("shown");
+                document.getElementById('text-field').value = "";
+                score++;
+            }
+            break;
+        }
+    }
+    if (checkWin()) {
+        console.log('game won');
+        document.getElementById('leaderboard-popup').style.display = "block";
+        document.getElementById("result").textContent = score + " points!"
+        document.getElementById("leaderboardInput").focus();
+    }
+});
+        
+
+
 function guessName(guess) {
     var scored = false;
     document.getElementById("text-field").focus();
@@ -98,7 +124,6 @@ function guessName(guess) {
         }
         document.getElementById('leaderboard-popup').style.display = "block";
         document.getElementById("result").textContent = score + " points!"
-
     }
 }
 
@@ -140,12 +165,10 @@ function checkGuess(guess1, guess2) {
     guess1 = cleanGuess(guess1);
     guess2 = cleanGuess(guess2);
 
-    const words1 = guess1.split(" ");
-    const words2 = guess2.split(" ");
+    const cleanedGuess1 = guess1.replace(/the/g, "").trim();
+    const cleanedGuess2 = guess2.replace(/the/g, "").trim();
 
-    const matchingWords = words1.filter(word => words2.includes(word));
-
-    return guess1 === guess2 || matchingWords.length >= Math.ceil(words1.length / 2);
+    return cleanGuess(guess1) === cleanGuess(guess2) || cleanedGuess1 === cleanedGuess2;
 }
 
 function addToLeaderboard(name) {

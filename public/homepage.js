@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const db = firebase.firestore();
 
-    const list = db.collection('mainLists').doc('test'); //gets a random list to do.
+    const list = db.collection('mainLists').doc('list2'); //gets a random list to do.
 
     const th1 = document.createElement('th');
     th1.textContent = 'Name';
