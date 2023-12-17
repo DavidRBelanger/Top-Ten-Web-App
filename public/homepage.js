@@ -1,11 +1,41 @@
+
 document.addEventListener("DOMContentLoaded", event => {
     
     const app = firebase.app();
 
     const db = firebase.firestore();
 
-    const list = db.collection('mainLists').doc('list2'); //gets a random list to do.
+    const date = getFormattedDate();
 
+    const serverDate = db.collection('mainLists').doc('serverDate');
+
+    var listNum;
+    serverDate.get().then((doc) => {
+        if (doc.exists) {
+            if (doc.data().date != date) {
+                console.log('updating date');
+                serverDate.update({
+                    date: date,
+                    num: getRandomList()
+                })
+                .then(() => {
+                    console.log('date updated');
+                    listNum = doc.data().num; // Assign listNum to the updated value of num
+                })
+                .catch((error) => {
+                    console.log('error updating date');
+                });
+            } else {
+                console.log('date is up to date');
+                listNum = doc.data().num; // Assign listNum to the current value of num
+                console.log(listNum);
+            }
+        } else {
+            console.log('no such document');
+        }
+        console.log(listNum);
+    const list = db.collection('mainLists').doc(listNum); //gets a random list to do.
+    
     const th1 = document.createElement('th');
     th1.textContent = 'Name';
     const th2 = document.createElement('th');
@@ -23,7 +53,11 @@ document.addEventListener("DOMContentLoaded", event => {
             const todayTitle = doc.data().title;
             document.getElementById('todayTitle').textContent += todayTitle;
 
-            // Sort leaderboard by score
+
+            if (leaderList == null) {
+                console.log('leaderList is null');
+                return;
+            }
             leaderList.sort((a, b) => b.score - a.score);
 
             for (var i = 0; i < leaderList.length; i++) {
@@ -47,9 +81,29 @@ document.addEventListener("DOMContentLoaded", event => {
     }).catch((error) => {
         console.log("Error getting document:", error);
     });
+    })
+
+    
 });
 
 
 function getRandomList() {
-    return "list" + Math.floor(Math.random()*76) + 1;
+    return "list" + (Math.floor(Math.random() * 9) + 1);
+}
+
+function getFormattedDate() {
+    // Get today's date object
+    const today = new Date();
+
+    // Extract year, month, and day (remember, months start at 0 in JavaScript)
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1; // Add 1 to get actual month
+    let day = today.getDate();
+
+    // Pad month and day if less than 10
+    if (month < 10) month = `0${month}`;
+    if (day < 10) day = `0${day}`;
+
+    // Build and return the formatted date string
+    return `${month}-${day}-${year}`;
 }
